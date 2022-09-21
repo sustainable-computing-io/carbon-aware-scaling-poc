@@ -48,10 +48,5 @@ def carbonAwareKeda(body, spec, name, namespace, status, **kwargs):
         body=keda_scaledobject_patch,
     )     
 
-    appApi = kubernetes.client.AppsV1Api()
-    targetObject = appApi.read_namespaced_deployment(
-        namespace='default',
-        name='dummy')
-
     kopf.info(body, reason=eventReason, message=eventMessage)
 
