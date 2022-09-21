@@ -4,7 +4,7 @@ https://github.com/kedacore/keda/issues/3467
 
 
 # Target User Experience:
- - Admin can enable Carbon awareness for kubernetes resources, without requiring code change.
+ - Admin can enable Carbon awareness for kubernetes resources, without requiring applications code change.
  - Admin defines Carbon Intensity thresholds to scale up/down based on, and AllowedMaxReplicaCount as a scaling target for the Scaled Object (Deployment or StatefulSet).
 
 ``` yaml
