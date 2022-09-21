@@ -35,7 +35,7 @@ spec:
  
  
  
- #Engineering solution
+ # Engineering solution
  - for POC: start with python
  - Frameworks
    - Kubernetes client / sdk
