@@ -31,7 +31,7 @@ spec:
 
 # Required data 
  - Customer input: define for the ScaledObject, the desired values for measuredEmission and allowedReplicaCount
- - Platform Metrics: Location based Carbon Marginal Intensity (also called Electricity Carbon Intensity), expressed in gCO2eq/Kwh
+ - Platform Metrics: Location based Carbon Marginal Intensity (also called Electricity Carbon Intensity), expressed in gCO2eq/Kwh (Location based means it depends on the country / Region / Data Center where the K8s cluster is deployed)
  
  
  
