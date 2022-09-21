@@ -14,11 +14,12 @@ def getCarbonIntensity():
     return carbon_rating 
 
 
-@kopf.on.event('scaledobject',
-                labels={'carbon-aware': 'yes'})
-def my_handler(event, **_):
-    print(event)
-
+###
+#@kopf.on.event('scaledobject',
+#                labels={'carbon-aware': 'yes'})
+#def my_handler(event, **_):
+#    print(event)
+###
 
 #Carbon Aware scaling
 @kopf.timer('scaledobject', interval=5.0, 
