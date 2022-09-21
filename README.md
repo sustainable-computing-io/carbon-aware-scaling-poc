@@ -45,7 +45,7 @@ spec:
    
    Architecture of poc vo
     - Operator code: handlers.py + DockerFile: Timer, regularly checks Carbon Intensity and scales up / down, Keda Scaled Object 
-    - Operator deploy: Deployment.yaml + rbac.yaml
+    - Operator deploy: OperatorDeployment.yaml + rbac.yaml
     - Operator target resource: Keda Http scaled object
      - Keda scaled Object Target : Dummy Deployment
    
