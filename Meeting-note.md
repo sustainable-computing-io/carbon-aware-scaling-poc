@@ -71,7 +71,7 @@ KEDA + Sustainability Meeting Minute
 ## Items
 - KEDA focus on scalability
 - Need power measurement (with and without co2)
-- CO2 emission API/SDK: current data and forecast data, time shift (i.e. best time for cron jobs)
+- CO2 emission API/SDK: current data and forecast data (for example to implement predictive node scaling )
 - KEDA focused items:
     - actions to reduce co2, how to measure saving: scaling and reporting
     - KEDA emits co2 event to trigger scale up/down, other components provide reporting
