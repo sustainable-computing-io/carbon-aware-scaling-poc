@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: carbon-intensity
+  labels:
+    app: carbon-intensity
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: carbon-intensity
+  template:
+    metadata:
+      labels:
+        app: carbon-intensity
+    spec:
+      containers:
+        - name: co2signal-handler
+          image: ""
+          env:
+            - name: BOOTSTRAP_SERVER
+              value: ""
+            - name: TOPIC
+              value: "carbon-intensity-topic"
+            - name: EMIISION_URL
+              value: "https://api.co2signal.com/v1/latest"
+            - name: AUTH_TOKEN
+              value: ""
+        - name: co2signal-collector
+          image: ""
+          ports:
+          - containerPort: 9000
+          env:
+          - name: BOOTSTRAP_SERVER
+            value: ""
+          - name: TOPIC
+            value: "carbon-intensity-topic"
+          - name: EMIISION_URL
+            value: "https://api.co2signal.com/v1/latest"
+          - name: AUTH_TOKEN
+            value: ""

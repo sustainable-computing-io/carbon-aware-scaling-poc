@@ -14,6 +14,7 @@ class CO2SignalCollector():
         self.BOOTSTRAP_SERVER = os.getenv('BOOTSTRAP_SERVER','my-cluster-kafka-0.my-cluster-kafka-brokers.kafka.svc:9092')
         token = os.getenv('AUTH_TOKEN','')
         self.HEADERS = {'auth-token': token}
+        self.LIMIT = 30
     
     
     def collect(self):
