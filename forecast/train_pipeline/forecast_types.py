@@ -27,6 +27,14 @@ class Region(Enum):
     Canada_Montreal_Datacenter = 21
 
 
+class Step_Type(Enum):
+    Hour = 1
+    Day = 2
+    Half_Hour = 3
+    Month = 4
+    Year = 5
+
+
 zones_to_region = {
 
 

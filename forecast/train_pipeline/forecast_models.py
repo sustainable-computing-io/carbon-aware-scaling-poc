@@ -1,13 +1,14 @@
-from GenericCarbonIntensityModel import GenericCarbonIntensityModel
+from forecast.train_pipeline.GenericCarbonIntensityForecastModel import GenericCarbonIntensityForecastModel
 import pandas as pd
 import xgboost 
 from neuralprophet import NeuralProphet
+from forecast_types import Region
 
 
-class NeuralProphetModel(GenericCarbonIntensityModel):
-    def __init__(self, co2_time_series_dataframe: pd.DataFrame, unique_model_id: str):
-        super().__init__(co2_time_series_dataframe, unique_model_id)
-        self.model = NeuralProphet(n_lags=3*24, n_forecasts=3*24, changepoints_range=0.90, n_changepoints=40, batch_size=50)
+class NeuralProphetModel(GenericCarbonIntensityForecastModel):
+    def __init__(self, co2_time_series_dataframe: pd.DataFrame, unique_model_id: str, region: Region):
+        super().__init__(co2_time_series_dataframe, unique_model_id, region)
+        self.model = NeuralProphet(n_lags=3*24, n_forecasts=3*24, changepoints_range=0.90, n_changepoints=30, batch_size=50)
         self.train_df = None
 
 
@@ -27,6 +28,7 @@ class NeuralProphetModel(GenericCarbonIntensityModel):
 
 
     def save_current_model(self) -> str:
+        #default save
         pass
 
     
@@ -41,7 +43,7 @@ class NeuralProphetModel(GenericCarbonIntensityModel):
         return forecast.tail(steps_into_future)
 
 
-class XGBoostRegressorModel(GenericCarbonIntensityModel):
+class XGBoostRegressorModel(GenericCarbonIntensityForecastModel):
     def __init__(self, co2_time_series_dataframe: pd.DataFrame, region: Region):
         super().__init__(co2_time_series_dataframe, region)
 
