@@ -1,0 +1,24 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: http-scaledobject
+  namespace: default
+  labels:
+    deploymentName: dummy
+    name: dummy
+    carbon-aware: yess
+spec:
+  pollingInterval: 10
+  cooldownPeriod:   12
+  maxReplicaCount: 10
+  minReplicaCount: 3
+  scaleTargetRef:
+    name: dummy
+  triggers:
+    - type: metrics-api
+      metadata:
+        targetValue: "4"
+        url: "https://greenapimockyaya.azurewebsites.net/api/scalingMetricAPI?code=81l864ztJPC0tlhtDeFccYEju5HMlpTZG8dZnD6ePgMqAzFugr6qvQ=="
+        valueLocation: 'Metric'
+  advanced:                                          # Optional. Section to specify advanced options
+    restoreToOriginalReplicaCount: false
