@@ -56,8 +56,3 @@ class CO2SignalHandler():
                     emissions_producer.produce(self.topic, json.dumps(co2_emissions_data).encode('utf-8'), callback=callback)
                     emissions_producer.poll(1)
             time.sleep(3600)
-
-
-if __name__ == "__main__":
-    obj = CO2SignalHandler()
-    obj.read()

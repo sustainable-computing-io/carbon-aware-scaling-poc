@@ -51,10 +51,3 @@ class CO2SignalCollector():
 
         while True:
             time.sleep(1)
-            
-                
-        
-
-if __name__ == "__main__":
-    obj = CO2SignalCollector()
-    obj.export()
