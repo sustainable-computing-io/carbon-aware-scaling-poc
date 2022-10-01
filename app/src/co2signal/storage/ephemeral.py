@@ -10,7 +10,6 @@ class EphermeralStorage(StorageProvider):
         with self.lock:
             self.storage.append(data)
 
-
     def consume_one(self):
         with self.lock:
             if len(self.storage):
