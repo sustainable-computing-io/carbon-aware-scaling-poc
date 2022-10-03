@@ -1,60 +1,33 @@
-
 from prometheus_client import start_http_server
 from prometheus_client.core import GaugeMetricFamily, REGISTRY, GaugeMetricFamily
-from confluent_kafka import Consumer
 import time
-import os, ast
-
-
+import os, ast, json
 
 class CO2SignalCollector():
-    def __init__(self):
-
-        self.TOPIC = os.getenv('TOPIC', 'carbon-intensity-topic')
-        self.BOOTSTRAP_SERVER = os.getenv('BOOTSTRAP_SERVER','my-cluster-kafka-0.my-cluster-kafka-brokers.kafka.svc:9092')
-        token = os.getenv('AUTH_TOKEN','')
-        self.HEADERS = {'auth-token': token}
-        self.LIMIT = 30
-    
+    def __init__(self, storage):
+        self.storage = storage
     
     def collect(self):
         print("Collect")   
- 
-        c = Consumer({
-            'bootstrap.servers': self.BOOTSTRAP_SERVER,
-            'group.id': 'mygroup',
-            'enable.auto.commit': True
-            })
-        
-        c.subscribe([self.TOPIC])
-        count =1
-        while count < self.LIMIT:
-            count = count +1
-            msg = c.poll(1)
-            if msg is not None:
-                print('Received message: {}'.format(msg.value().decode('utf-8')))
-                
-                message = msg.value()
-                message=ast.literal_eval(message.decode('utf-8'))
-
-                gauge = GaugeMetricFamily("carbon_intensity","Number to indicate carbon intensity",labels=[message['countryCode'],message['data']['datetime']])
-                gauge.add_metric(['carbon_intensity'], message['data']['carbonIntensity'])
+        while True:
+            message = self.storage.consume_one()
+            if message is not None:
+                message = json.loads(message)
+                print(message)
+                gauge = GaugeMetricFamily("carbon_intensity_zone_" + message['countryCode'],
+                    "Number to indicate carbon intensity in zone " + message['countryCode'], labels=['datetime'])
+                # FIXME: adjust to timezone
+                gauge.add_metric([message['data']['datetime']], message['data']['carbonIntensity'])
                 print("Metric added")
                 yield gauge 
-        c.close()
-            
-      
-    def export(self):
+            else:
+                break
+
+
+    def export(self, storage):
         print("export")
         start_http_server(9000)
-        REGISTRY.register(CO2SignalCollector())
+        REGISTRY.register(CO2SignalCollector(storage))
 
         while True:
             time.sleep(1)
-            
-                
-        
-
-if __name__ == "__main__":
-    obj = CO2SignalCollector()
-    obj.export()
