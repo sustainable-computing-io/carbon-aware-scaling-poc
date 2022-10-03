@@ -14,10 +14,10 @@ class CO2SignalCollector():
             if message is not None:
                 message = json.loads(message)
                 print(message)
-                gauge = GaugeMetricFamily("carbon_intensity_zone_" + message['countryCode'],
-                    "Number to indicate carbon intensity in zone " + message['countryCode'], labels=['datetime'])
+                gauge = GaugeMetricFamily("carbon_intensity",
+                    "Number to indicate carbon intensity", labels=['zone','datetime'])
                 # FIXME: adjust to timezone
-                gauge.add_metric([message['data']['datetime']], message['data']['carbonIntensity'])
+                gauge.add_metric([message['countryCode'], message['data']['datetime']], message['data']['carbonIntensity'])
                 print("Metric added")
                 yield gauge 
             else:
