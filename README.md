@@ -62,5 +62,7 @@ Architecture of poc vo
    
 ## Open Items
 
-- Integrate Carbon Intensity Data via K8s Metrics (Prometheus)
-- define "Keda Carbon Aware Scaling" architecture --> as an extension
+- [ ] Determine initial data provider to integrate
+- [ ] Integrate Carbon Intensity Data via K8s Metrics (Prometheus)
+- [ ] Update POC to use real-world metrics rather than mock
+- [ ] Define proposal for KEDA around Carbon Aware Scaling and how to integrate it as an extension
