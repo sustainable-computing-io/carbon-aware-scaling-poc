@@ -1,0 +1,9 @@
+{
+    "zone": "DE",
+    "carbonIntensity": 302,
+    "datetime": "2018-04-25T18:07:00.350Z",
+    "updatedAt": "2018-04-25T18:07:01.000Z",
+    "emissionFactorType": "lifecycle",
+    "isEstimated": true,
+    "estimationMethod": "TIME_SLICER_AVERAGE"
+  }

@@ -1,0 +1,72 @@
+{
+	"definitions": {},
+	"$schema": "http://json-schema.org/draft-07/schema#", 
+	"$id": "https://example.com/object1663775770.json", 
+	"title": "Root", 
+	"type": "object",
+	"required": [
+		"zone",
+		"carbonIntensity",
+		"datetime"
+	],
+	"properties": {
+		"zone": {
+			"$id": "#root/zone", 
+			"title": "Zone", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"DE"
+			],
+			"pattern": "^.*$"
+		},
+		"carbonIntensity": {
+			"$id": "#root/carbonIntensity", 
+			"title": "Carbonintensity", 
+			"type": "integer",
+			"examples": [
+				302
+			],
+			"default": 0
+		},
+		"datetime": {
+			"$id": "#root/datetime", 
+			"title": "Datetime", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"2018-04-25T18:07:00.350Z"
+			],
+			"pattern": "^.*$"
+		},
+		"emissionFactorType": {
+			"$id": "#root/emissionFactorType", 
+			"title": "Emissionfactortype", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"lifecycle"
+			],
+			"pattern": "^.*$"
+		},
+		"isEstimated": {
+			"$id": "#root/isEstimated", 
+			"title": "Isestimated", 
+			"type": "boolean",
+			"examples": [
+				true
+			],
+			"default": true
+		},
+		"estimationMethod": {
+			"$id": "#root/estimationMethod", 
+			"title": "Estimationmethod", 
+			"type": "string",
+			"default": "",
+			"examples": [
+				"TIME_SLICER_AVERAGE"
+			],
+			"pattern": "^.*$"
+		}
+	}
+}
