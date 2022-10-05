@@ -1,0 +1,142 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: carbon-intensity-exporter
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: carbon-intensity-exporter
+  namespace: carbon-intensity-exporter
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: carbon-intensity-exporter
+      app.kubernetes.io/name: carbon-intensity-exporter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: carbon-intensity-exporter
+        app.kubernetes.io/name: carbon-intensity-exporter
+    spec:
+      containers:
+      - name: carbon-intensity-exporter
+        image: quay.io/sustainable_computing_io/carbon-intensity-exporter:latest
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            memory: "400Mi"
+            cpu: "100m"
+        securityContext:
+          privileged: true
+        command:
+        - python3
+        - /app/exporter.py
+        ports:
+        - containerPort: 9000
+          name: http
+        env:
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: carbon-intensity-exporter
+  namespace: carbon-intensity-exporter
+  labels:
+    app.kubernetes.io/component: carbon-intensity-exporter
+    app.kubernetes.io/name: carbon-intensity-exporter
+spec:
+  selector:
+    app.kubernetes.io/component: carbon-intensity-exporter
+    app.kubernetes.io/name: carbon-intensity-exporter
+  ports:
+  - name: http
+    port: 9000
+    targetPort: http
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app.kubernetes.io/component: carbon-intensity-exporter
+    app.kubernetes.io/name: carbon-intensity-exporter
+  name: carbon-intensity-exporter
+  namespace: carbon-intensity-exporter
+spec:
+  endpoints:
+  - interval: 3s
+    port: http
+    relabelings:
+    - action: replace
+      regex: (.*)
+      replacement: $1
+      sourceLabels:
+      - __meta_kubernetes_pod_node_name
+      targetLabel: instance
+    scheme: http
+  jobLabel: app.kubernetes.io/name
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: carbon-intensity-exporter
+      app.kubernetes.io/name: carbon-intensity-exporter
+---
+# clusterrole prometheus-k8s comes from kube-prometheus 
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: prometheus-k8s
+  namespace: carbon-intensity-exporter
+  labels:
+    app.kubernetes.io/component: prometheus
+    app.kubernetes.io/instance: k8s
+    app.kubernetes.io/name: prometheus
+rules:
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - ''
+    resources:
+      - services
+      - endpoints
+      - pods
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - extensions
+    resources:
+      - ingresses
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - networking.k8s.io
+    resources:
+      - ingresses
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: prometheus-k8s
+  namespace: carbon-intensity-exporter
+  labels:
+    app.kubernetes.io/component: prometheus
+    app.kubernetes.io/instance: k8s
+    app.kubernetes.io/name: prometheus
+subjects:
+  - kind: ServiceAccount
+    name: prometheus-k8s
+    namespace: monitoring
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: prometheus-k8s
