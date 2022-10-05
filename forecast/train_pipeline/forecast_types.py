@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Zone(Enum):
     pass    
 
@@ -25,6 +26,16 @@ class Region(Enum):
     Switzerland_Datacenter = 19
     Canada_Ontario_Datacenter = 20
     Canada_Montreal_Datacenter = 21
+    Brazil_Datacenter = 22
+    Chile_Dataceter = 23
+    #below are all US datacenters
+
+
+class Model_Type(Enum):
+    NeuralProphetModel = 1
+    ARIMA = 2
+    XGBoostRegressor = 3
+    GenericCarbonIntensityForecastModel = 4
 
 
 class Step_Type(Enum):
@@ -33,9 +44,21 @@ class Step_Type(Enum):
     Half_Hour = 3
     Month = 4
     Year = 5
+    Auto = 6
+
+
+step_type_to_neural_prophet_freq = {
+    Step_Type.Day: "D",
+    Step_Type.Half_Hour: "30min",
+    Step_Type.Month: "M",
+    Step_Type.Year: "Y",
+    Step_Type.Hour: "D",
+    Step_Type.Auto: "auto"
+}
 
 
 zones_to_region = {
 
 
 }
+
