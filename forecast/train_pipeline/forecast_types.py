@@ -31,13 +31,6 @@ class Region(Enum):
     #below are all US datacenters
 
 
-class Model_Type(Enum):
-    NeuralProphetModel = 1
-    ARIMA = 2
-    XGBoostRegressor = 3
-    GenericCarbonIntensityForecastModel = 4
-
-
 class Step_Type(Enum):
     Hour = 1
     Day = 2
@@ -45,6 +38,8 @@ class Step_Type(Enum):
     Month = 4
     Year = 5
     Auto = 6
+
+step_to_m = {Step_Type.Auto: 1, Step_Type.Day: 7, Step_Type.Month: 12, Step_Type.Year: 1, Step_Type.Hour: 24, Step_Type.Half_Hour: 48}
 
 
 step_type_to_neural_prophet_freq = {
