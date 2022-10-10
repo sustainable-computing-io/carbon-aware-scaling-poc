@@ -5,10 +5,6 @@ metadata:
 spec:
   kedaScaledObjectRef:
     name: httpj
-  kedaScaledObjectsRef:
-    labelSelectors:
-      carbon-aware: yess
-      category: officeApp
     scalingRules:
       - carbonIntensity: 90
         allowedMaxReplicaCount: 80
