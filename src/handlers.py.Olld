@@ -103,6 +103,7 @@ def configure(settings: kopf.OperatorSettings, **_):
 
 @kopf.on.mutate('scaledobjects')
 def annotate_current_scaledobject(body, old, new, spec, name, namespace, annotations, patch, operation, **kwargs):
+    #import pudb ; pudb.set_trace()
 
     if operation == "CREATE":
 
@@ -196,12 +197,12 @@ def my_handler(event, **_):
 ##############################
 
 #Carbon Aware scaling
-@kopf.timer('scaledobject', interval=10.0, 
+@kopf.timer('scaledobject', interval=1000.0, 
                 annotations={'carbon-aware-actions.actionkind': 'carbonawarescaler'})
 def carbonAwareKeda(carbonawarescalers_idx: kopf.Index, body, spec, name, namespace, status, annotations, **kwargs):
 
     carbonawarescalerName = annotations.get("carbon-aware-actions.actionRef", None) 
-    defaultMaxReplicaCount = annotations.get("carbon-aware-actions.param.defaultMaxReplicaCount", None) 
+    defaultMaxReplicaCount = annotations.get("carbon-aware-actions.defaultMaxReplicaCount", None) 
 
     # TODO: change to namespaced CRD: scalingRules = carbonawarescalers_idx.get((namespace, carbonawarescalerName))
     scalingRules = carbonawarescalers_idx.get((None, carbonawarescalerName))

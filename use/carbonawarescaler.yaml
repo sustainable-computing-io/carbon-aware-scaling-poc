@@ -1,0 +1,19 @@
+apiVersion: carbon-aware-actions.cncf/dev
+kind: CarbonAwareScaler
+metadata:
+ name: scaledown2
+spec:
+  kedaScaledObjectRef:
+    name: httpj
+  kedaScaledObjectsRef:
+    labelSelectors:
+      carbon-aware: yess
+      category: officeApp
+    scalingRules:
+      - carbonIntensity: 90
+        allowedMaxReplicaCount: 80
+      - carbonIntensity: 100
+        allowedMaxReplicaCount: 50
+      - carbonIntensity: 110
+        allowedMaxReplicaCount: 40
+
