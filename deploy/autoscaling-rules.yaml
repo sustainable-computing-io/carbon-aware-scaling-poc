@@ -18,7 +18,7 @@ spec:
     - type: metrics-api
       metadata:
         targetValue: "4"
-        url: "https://greenapimockyaya.azurewebsites.net/api/scalingMetricAPI?code=81l864ztJPC0tlhtDeFccYEju5HMlpTZG8dZnD6ePgMqAzFugr6qvQ=="
+        url: "https://greenapimockyaya.azurewebsites.net/api/scalingMetricAPI"
         valueLocation: 'Metric'
   advanced:                                          # Optional. Section to specify advanced options
     restoreToOriginalReplicaCount: false
