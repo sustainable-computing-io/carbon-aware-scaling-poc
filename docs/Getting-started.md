@@ -5,7 +5,7 @@
 - Kubernetes cluster
 - Python3.7 and above
 - kopf
-- Keda
+- KEDA
 
 ## Installation
 
