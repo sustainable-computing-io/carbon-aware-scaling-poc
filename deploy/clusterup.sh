@@ -42,7 +42,7 @@ function _deploy_carbon_intensity_exporter(){
 
 
 _deploy_prometheus_operator;
-_deploy_kepler;
+#_deploy_kepler;
 _deploy_carbon_intensity_exporter;
 
 pip install kopf;
