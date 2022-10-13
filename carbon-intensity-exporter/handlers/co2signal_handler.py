@@ -1,6 +1,6 @@
 import time
 import requests, json,  itertools, os
-from .data_provider import DataProvider
+from data_provider import DataProvider
 
 class CO2SignalHandler(DataProvider):
 

@@ -36,6 +36,8 @@ spec:
         - containerPort: 9000
           name: http
         env:
+        - name: ZONE
+          value: "DK"
         - name: NODE_NAME
           valueFrom:
             fieldRef:
