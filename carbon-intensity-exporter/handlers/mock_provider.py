@@ -16,13 +16,15 @@ class MockProvider(DataProvider):
             test_file = nationalgrideso_url
         data = pd.read_csv(test_file, delimiter=',')
 
+        ZONE = os.getenv('ZONE','GB')
+
         for index, d in data.iterrows():
             di = {}
             di['data'] = {}
             di['data']['carbonIntensity'] = d['CARBON_INTENSITY']
             di['data']['datetime'] = d['DATETIME']
             di['data']['fossilFuelPercentage'] = d['FOSSIL_perc']
-            di['countryCode'] = 'GB'
+            di['countryCode'] = ZONE
 
             self.data.append(json.dumps(di))
             
