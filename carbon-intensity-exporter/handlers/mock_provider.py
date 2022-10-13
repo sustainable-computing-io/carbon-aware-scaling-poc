@@ -1,7 +1,7 @@
 import time, os, json
 from os.path import exists
 import pandas as pd
-from .data_provider import DataProvider
+from data_provider import DataProvider
 
 nationalgrideso_file = 'df_fuel_ckan.csv' 
 nationalgrideso_url = 'https://data.nationalgrideso.com/backend/dataset/88313ae5-94e4-4ddc-a790-593554d8c6b9/resource/f93d1835-75bc-43e5-84ad-12472b180a98/download/df_fuel_ckan.csv'
