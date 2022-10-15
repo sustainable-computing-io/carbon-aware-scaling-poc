@@ -1,0 +1,30 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: carbon-intensity-exporter
+  namespace: carbon-intensity-exporter
+spec:
+  serviceAccountName: prometheus
+  serviceMonitorSelector:
+    matchLabels:
+      app.kubernetes.io/component: carbon-intensity-exporter
+  resources:
+    requests:
+      memory: 400Mi
+  enableAdminAPI: false
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus
+  namespace: carbon-intensity-exporter
+spec:
+  type: LoadBalancer
+  ports:
+  - name: web
+    port: 9090
+    targetPort: web
+  selector:
+    prometheus: carbon-intensity-exporter

@@ -7,10 +7,14 @@ import time
 import requests
 import json
 
-prom_endpoint = os.getenv("PROM_ENDPOINT")
+#prom_endpoint = os.getenv("PROM_ENDPOINT", default="https://prometheus.carbon-intensity-exporter.svc.cluster.local:9090")
+
+prom_endpoint = os.getenv("PROM_ENDPOINT", default="http://20.208.28.72:9090")
 prom_query = os.getenv("PROM_QUERY", default="carbon_intensity")
 
 def getCarbonIntensityFromProm():
+
+
     params={
         'query': prom_query
     }
@@ -18,8 +22,11 @@ def getCarbonIntensityFromProm():
     results = response.json()['data']['result']
     if len(results) > 0:
         carbon_intensity_value = results[0]['value'][1]
+        print(carbon_intensity_value)
         return carbon_intensity_value
     return None
+
+
 
 def getCarbonIntensityFromCarbonRating():
     response = requests.get('https://greenapimockyaya.azurewebsites.net/api/CarbonRating')
@@ -28,7 +35,8 @@ def getCarbonIntensityFromCarbonRating():
     return carbon_rating 
 
 def getCarbonIntensity():
-    return getCarbonIntensityFromCarbonRating()
+    #return getCarbonIntensityFromCarbonRating()
+    return getCarbonIntensityFromProm()
 ##############################
 
 
