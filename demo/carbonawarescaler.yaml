@@ -7,7 +7,7 @@ spec:
     name: httpj
   defaultMaxReplicaCount: 89 # when Carbon Intensiy is lower than 90 (lowest provided input)
   scalingRules:
-    - carbonIntensity: 90  # if CarbonIntensity between 90 and 10 => set to MaxReplicaCount to 80
+    - carbonIntensity: 90  # if CarbonIntensity between 90 and 10 => set to MaxReplicaCount to 81
       allowedMaxReplicaCount: 81
     - carbonIntensity: 100
       allowedMaxReplicaCount: 53
