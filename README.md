@@ -28,9 +28,9 @@ spec:
   maxReplicaCount:  100                              # Optional. Default: 100
   environmentalImpact:
     carbon:
-    - measuredEmission: 5%
+    - measuredEmission: 300
       allowedMaxReplicaCount: 50
-    - measuredEmission: 10%
+    - measuredEmission: 500
       allowedMaxReplicaCount: 10
   fallback:                                          # Optional. Section to specify fallback options
     failureThreshold: 3                              # Mandatory if fallback section is included

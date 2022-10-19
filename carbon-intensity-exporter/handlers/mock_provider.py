@@ -11,6 +11,8 @@ class MockProvider(DataProvider):
         self.pause_interval = int(os.getenv('PAUSE_INTERVAL', '5'))
         self.storage = storage
         self.data = list()
+
+    def populate_data(self):
         test_file = nationalgrideso_file
         if exists(test_file) is False:
             test_file = nationalgrideso_url
@@ -28,11 +30,11 @@ class MockProvider(DataProvider):
 
             self.data.append(json.dumps(di))
             
-
-
     def read(self):
         print("Read data")
-        for d in self.data:
-            co2_emissions_data= d
-            self.storage.produce_one(co2_emissions_data)
-            time.sleep(self.pause_interval)
+        while True:
+            self.populate_data()
+            for d in self.data:
+                co2_emissions_data= d
+                self.storage.produce_one(co2_emissions_data)
+                time.sleep(self.pause_interval)
