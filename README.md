@@ -2,6 +2,11 @@
 This project is to integrate CO2 emission intensity data into KEDA scaling decision.
 
 
+# Overview
+
+The background, architecture, and findings can be found in [this Google slide](https://docs.google.com/presentation/d/1NqfwBgWaBuaiL7-LzAbnnFxxHk-H_ZqBbkfV105pTl8/edit?usp=sharing).
+
+
 # Data Sources
 
 - National Grid ESO https://data.nationalgrideso.com/search?q=carbon&sort=score%3Adesc
