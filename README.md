@@ -4,7 +4,7 @@ This project is to integrate CO2 emission intensity data into KEDA scaling decis
 
 # Overview
 
-The background, architecture, and findings can be found in [this Google slide](https://docs.google.com/presentation/d/1NqfwBgWaBuaiL7-LzAbnnFxxHk-H_ZqBbkfV105pTl8/edit?usp=sharing).
+The background, architecture, findings and demo can be found on the [YouTube playlist](https://www.youtube.com/playlist?list=PLhiQtL6gPrYrdpfhCoxD9ydT6TqNQBA4A)
 
 
 # Data Sources
